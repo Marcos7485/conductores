@@ -41,7 +41,6 @@ function changeComponent(componentName: string) {
 .content {
     padding: 5rem 12rem 0 12rem;
     width: 100%;
-    overflow-y: auto;
     margin-top: 5rem;
 }
 
