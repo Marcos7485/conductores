@@ -2,10 +2,12 @@
 import { ref, markRaw } from 'vue';
 import Principal from '../components/Principal.vue';
 import HeaderTitle from '../components/layouts/header.vue';
+import FormularioAltaAuto from '../components/Formularios/FormularioAltaAuto.vue';
 
 
 const components = {
-    Principal: markRaw(Principal)
+    Principal: markRaw(Principal),
+    FormularioAltaAuto:markRaw(FormularioAltaAuto)
 };
 
 const currentComponentName = ref(components.Principal);

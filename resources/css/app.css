@@ -75,15 +75,15 @@ textarea{
 }
 
 input {
-  border-radius: 1rem 4rem;
-  padding: .1rem 1rem .2rem 1rem;
+  border-radius: .2rem;
+  padding: 0.6em 1.2em;
   background-color: white;
   color: black;
 }
 
 select {
-  border-radius: 1rem 4rem;
-  padding: .1rem 1rem .2rem 1rem;
+  border-radius: .2rem;
+  padding: 0.6em 1.2em;
   background-color: white;
   color: black;
 }

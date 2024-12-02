@@ -1,4 +1,15 @@
 <script setup lang="ts">
+
+const emit = defineEmits(['changeComponent']);
+
+const AltaAuto = async () => {
+    try {
+        emit('changeComponent', 'FormularioAltaAuto');
+    } catch (error) {
+        console.log('Error en procesar el alta del vehiculo', error);
+    }
+}
+
 </script>
 
 <template>
@@ -11,7 +22,7 @@
             <h3>Autos</h3>
         </div>
         <div class="autos-menu">
-            <button>ALTA</button>
+            <button @click="AltaAuto">ALTA</button>
             <button>MODIFICACIÓN</button>
             <button>BAJA</button>
         </div>
