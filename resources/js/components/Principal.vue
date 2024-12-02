@@ -1,0 +1,70 @@
+<script setup lang="ts">
+</script>
+
+<template>
+    <div class="page">
+        <div class="title">
+            <h3>Trámites</h3>
+            <hr>
+        </div>
+        <div class="autos-title">
+            <h3>Autos</h3>
+        </div>
+        <div class="autos-menu">
+            <button>ALTA</button>
+            <button>MODIFICACIÓN</button>
+            <button>BAJA</button>
+        </div>
+
+        <div class="conductores-title">
+            <h3>Conductores</h3>
+        </div>
+        <div class="conductores-menu">
+            <button>ALTA</button>
+            <button>MODIFICACIÓN</button>
+            <button>BAJA</button>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+
+.conductores-menu button {
+    height: 4rem;
+    width: 35rem;
+    margin-right: 2rem;
+}
+
+.conductores-title {
+    margin-top: 10rem;
+    text-align: left;
+}
+
+
+.autos-menu button {
+    height: 4rem;
+    width: 35rem;
+    margin-right: 2rem;
+}
+
+.autos-title {
+    margin-top: 5rem;
+    text-align: left;
+}
+
+.conductores-menu {
+    display: flex;
+    align-items: left;
+    font-size: 1.4rem;
+}
+
+.autos-menu {
+    display: flex;
+    align-items: left;
+    font-size: 1.4rem;
+}
+
+.title {
+    text-align: left;
+}
+</style>
