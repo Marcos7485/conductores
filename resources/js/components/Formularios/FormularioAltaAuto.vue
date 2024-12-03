@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
+const emit = defineEmits(['changeComponent']);
 
 const formularioActivo1 = ref<boolean>(true);
 const formularioActivo2 = ref<boolean>(false);
@@ -177,9 +178,6 @@ const inicio = async () => {
                             </div>
 
                         </div>
-                        <div class="next-1">
-                            <button @click="SegundoPaso">SIGUIENTE</button>
-                        </div>
                     </div>
                 </div>
 
@@ -233,10 +231,6 @@ const inicio = async () => {
                             </tbody>
                         </table>
                     </div>
-                    <div class="opciones-buttons">
-                        <button class="anterior-button" @click="PrimerPaso">ANTERIOR</button>
-                        <button @click="TecerPaso">FINALIZAR</button>
-                    </div>
                 </div>
 
                 <div class="card-3" v-if="formularioActivo3">
@@ -247,7 +241,19 @@ const inicio = async () => {
                                 Le enviaremos por e-mail novedades.</p>
                         </div>
                     </div>
-                    <div class="opciones-buttons">
+                </div>
+            </div>
+
+            <div class="opciones-buttons">
+                <div>
+                    <div v-if="formularioActivo1">
+                        <button @click="SegundoPaso">SIGUIENTE</button>
+                    </div>
+                    <div v-if="formularioActivo2">
+                        <button class="anterior-button" @click="PrimerPaso">ANTERIOR</button>
+                        <button type="submit">FINALIZAR</button>
+                    </div>
+                    <div v-if="formularioActivo3">
                         <button @click="inicio()">VOLVER AL INICIO</button>
                     </div>
                 </div>
@@ -257,17 +263,16 @@ const inicio = async () => {
 </template>
 
 <style scoped>
-
 .finalizado {
     padding: 15rem 15rem 9rem 15rem;
     width: 90%;
 }
 
-.card h1{
+.card h1 {
     font-size: var(--fontsize);
 }
 
-.card{
+.card {
     text-align: left;
     padding: 1rem;
     border: solid 2px black;
@@ -278,11 +283,9 @@ const inicio = async () => {
     background-color: white;
     border: solid 2px black;
     color: black;
-    margin-top: 14rem;
 }
 
 .opciones-buttons button {
-    margin-top: 5rem;
     height: 3rem;
     width: 25rem;
     margin-right: 2rem;
@@ -290,7 +293,7 @@ const inicio = async () => {
 
 .opciones-buttons {
     display: flex;
-    width: 100%;
+    width: 82%;
     justify-content: right;
 }
 
@@ -377,11 +380,14 @@ const inicio = async () => {
 .card-2 {
     display: flex;
     flex-direction: column;
+    margin-bottom: 7rem;
+
 }
 
 
 .card-1 {
     display: flex;
+    margin-bottom: 5rem;
 }
 
 .first-opcion hr.active {
@@ -439,18 +445,6 @@ const inicio = async () => {
 
 .formulario {
     padding: 0rem 25rem;
-}
-
-.next-1 button {
-    margin-top: 14rem;
-    height: 3rem;
-    width: 25rem;
-}
-
-.next-1 {
-    display: flex;
-    width: 100%;
-    justify-content: right;
 }
 
 .title {
