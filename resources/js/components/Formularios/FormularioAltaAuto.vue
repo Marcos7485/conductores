@@ -47,9 +47,7 @@ const AltaAutoSumbit = async () => {
     if (isDisabled.value) return;
     isDisabled.value = true;
     try {
-        // const response = await axios.post('/api/', formData.value);
-        // responseMessage.value = response.data.message;
-        console.log(formData.value);
+        const response = await axios.post('/api/crear-auto', formData.value);
         formDataClear();
         TecerPaso();
     } catch (error) {
