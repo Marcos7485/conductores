@@ -47,7 +47,9 @@ const AltaAutoSumbit = async () => {
     if (isDisabled.value) return;
     isDisabled.value = true;
     try {
+        console.log(formData.value);
         const response = await axios.post('/api/crear-auto', formData.value);
+
         formDataClear();
         TecerPaso();
     } catch (error) {
@@ -167,7 +169,8 @@ const inicio = async () => {
                         </div>
                         <div class="input-form">
                             <label><b>Año</b></label>
-                            <input type="number" v-model="formData.data" min="1900" max="2100" placeholder="label" required>
+                            <input type="number" v-model="formData.data" min="1900" max="2100" placeholder="label"
+                                required>
                         </div>
                     </div>
 
