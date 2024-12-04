@@ -22,14 +22,15 @@ class AutosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'comprobante' => 'required|string|max:255',
-            'conductores' => 'required|array|min:1',
-            'conductores.*' => 'string|max:255', 
-            'marca' => 'required|string|max:255',
-            'modelo' => 'required|string|max:255',
-            'modelo_2' => 'required|string|max:255',
-            'patente' => 'required|string|max:255',
-            'poliza' => 'required|string|max:255',
+            'comprobante' => ['required'],
+            'conductores' => ['required'],  
+            'data' => ['required'],
+            'marca' => ['required'],
+            'modelo' => ['required'],
+            'modelo_2' => ['required'],
+            'organismo' => ['required'],
+            'patente' => ['required'],
+            'poliza' => ['required'],
         ];
     }
 }

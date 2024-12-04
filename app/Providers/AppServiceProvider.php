@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\AutoService;
+use App\Services\AutoServices;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,8 +12,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(AutoService::class, function ($app){
-            return new AutoService();
+        $this->app->singleton(AutoServices::class, function ($app){
+            return new AutoServices();
         });
     }
 

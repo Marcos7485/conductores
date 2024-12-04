@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Autos;
 
-class AutoService
+class AutoServices
 {
     public function getAllAutos()
     {
@@ -24,6 +24,8 @@ class AutoService
         $auto->patente = $data['patente'];
         $auto->poliza = $data['poliza'];
         $auto->save();
+
+        return;
     }
 
     public function updateAuto(int $id, array $data)

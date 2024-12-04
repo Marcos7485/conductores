@@ -7,3 +7,6 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Main');
 });
+
+
+Route::get('/test', [AutosController::class, 'test']);
