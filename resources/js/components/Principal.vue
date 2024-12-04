@@ -10,6 +10,23 @@ const AltaAuto = async () => {
     }
 }
 
+const ModificacionAuto = async () => {
+    try {
+        emit('changeComponent', 'FormularioModificacionAuto');
+    } catch (error) {
+        console.log('Error en procesar el alta del vehiculo', error);
+    }
+}
+
+const BajaAuto = async () => {
+    try {
+        emit('changeComponent', 'FormularioBajaAuto');
+    } catch (error) {
+        console.log('Error en procesar el alta del vehiculo', error);
+    }
+}
+
+
 </script>
 
 <template>
@@ -23,8 +40,8 @@ const AltaAuto = async () => {
         </div>
         <div class="autos-menu">
             <button @click="AltaAuto">ALTA</button>
-            <button>MODIFICACIÓN</button>
-            <button>BAJA</button>
+            <button @click="ModificacionAuto">MODIFICACIÓN</button>
+            <button @click="BajaAuto">BAJA</button>
         </div>
 
         <div class="conductores-title">

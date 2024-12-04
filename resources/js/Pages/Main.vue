@@ -2,12 +2,16 @@
 import { ref, markRaw } from 'vue';
 import Principal from '../components/Principal.vue';
 import HeaderTitle from '../components/layouts/header.vue';
-import FormularioAltaAuto from '../components/Formularios/FormularioAltaAuto.vue';
+import FormularioAltaAuto from '../components/Formularios/Autos/FormularioAlta.vue';
+import FormularioModificacionAuto from '../components/Formularios/Autos/FormularioModificacion.vue';
+import FormularioBajaAuto from '../components/Formularios/Autos/FormularioBaja.vue';
 
 
 const components = {
     Principal: markRaw(Principal),
-    FormularioAltaAuto:markRaw(FormularioAltaAuto)
+    FormularioAltaAuto:markRaw(FormularioAltaAuto),
+    FormularioModificacionAuto:markRaw(FormularioModificacionAuto),
+    FormularioBajaAuto: markRaw(FormularioBajaAuto)
 };
 
 const currentComponentName = ref(components.Principal);
