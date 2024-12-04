@@ -47,8 +47,9 @@ const AltaAutoSumbit = async () => {
     if (isDisabled.value) return;
     isDisabled.value = true;
     try {
-        // const response = await axios.post('/new/cliente', formData.value);
+        // const response = await axios.post('/api/', formData.value);
         // responseMessage.value = response.data.message;
+        console.log(formData.value);
         formDataClear();
         TecerPaso();
     } catch (error) {
@@ -91,10 +92,18 @@ const TecerPaso = async () => {
     formularioActivo3.value = true;
 }
 
+const conductorInput = ref('');
 
 const plusFunction = async () => {
-    console.log("OKK");
+    if (conductorInput.value.trim() !== '') {
+        formData.value.conductores.push(conductorInput.value.trim());
+        conductorInput.value = '';
+    }
 }
+
+const removeConductor = (index: number) => {
+    formData.value.conductores.splice(index, 1);
+};
 
 const inicio = async () => {
     try {
@@ -115,12 +124,12 @@ const inicio = async () => {
         </div>
         <div class="formulario">
             <div class="form-titles">
-                <div class="col-4 first-opcion" @click="PrimerPaso">
+                <div class="col-4 first-opcion">
                     <p>PASO 1</p>
                     <hr :class="{ active: formularioActivo1 }">
                 </div>
 
-                <div class="col-4 second-opcion" @click="SegundoPaso">
+                <div class="col-4 second-opcion">
                     <p>PASO 2</p>
                     <hr :class="{ active: formularioActivo2 }">
                 </div>
@@ -156,24 +165,24 @@ const inicio = async () => {
                         </div>
                         <div class="input-form">
                             <label><b>Modelo</b></label>
-                            <input type="text" placeholder="label" required>
+                            <input type="text" v-model="formData.modelo_2" placeholder="label" required>
                         </div>
                         <div class="input-form">
                             <label><b>Año</b></label>
-                            <input type="number" min="1900" max="2100" placeholder="label" required>
+                            <input type="number" v-model="formData.data" min="1900" max="2100" placeholder="label" required>
                         </div>
                     </div>
 
                     <div class="form-B col-6">
                         <div class="input-form">
                             <label><b>Patente</b></label>
-                            <input type="text" placeholder="label" required>
+                            <input type="text" v-model="formData.patente" placeholder="label" required>
                         </div>
 
                         <div class="input-form">
                             <label><b>Póliza de seguro</b></label>
                             <div class="input-withbutton">
-                                <input type="text" placeholder="label" required>
+                                <input type="text" v-model="formData.poliza" placeholder="label" required>
                                 <button>BUTTON</button>
                             </div>
                         </div>
@@ -181,7 +190,7 @@ const inicio = async () => {
                         <div class="input-form">
                             <label><b>Comprobante de pago patente</b></label>
                             <div class="input-withbutton">
-                                <input type="text" placeholder="label" required>
+                                <input type="text" v-model="formData.comprobante" placeholder="label" required>
                                 <button>BUTTON</button>
                             </div>
 
@@ -213,13 +222,7 @@ const inicio = async () => {
 
                         <div class="input-form-Seg">
                             <label><b>Nombre y Apellido del Conductor</b></label>
-                            <select v-model="formData.conductores" required>
-                                <option value="1">A</option>
-                                <option value="2">B</option>
-                                <option value="3">C</option>
-                                <option value="4">D</option>
-                                <option value="5">E</option>
-                            </select>
+                            <input type="text" v-model="conductorInput">
                             <div class="plus-icon" @click="plusFunction()">
                                 <i class="fa-solid fa-plus"></i>
                             </div>
@@ -233,17 +236,13 @@ const inicio = async () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="3" style="text-align: left;">Avelina Frias</td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" style="text-align: left;">Roberto Calatayud</td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" style="text-align: left;">Gaspar Urbano</td>
-                                    <td><i class="fa-solid fa-trash"></i></td>
+                                <tr v-for="(conductor, index) in formData.conductores" :key="index">
+                                    <td>{{ conductor }}</td>
+                                    <td>
+                                        <button @click="removeConductor(index)">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -252,7 +251,7 @@ const inicio = async () => {
                 <div class="opciones-buttons">
                     <div v-if="formularioActivo2">
                         <button class="anterior-button" @click="PrimerPaso">ANTERIOR</button>
-                        <button type="submit">FINALIZAR</button>
+                        <button type="submit" :disabled="isDisabled">FINALIZAR</button>
                     </div>
                 </div>
             </form>
@@ -331,7 +330,7 @@ const inicio = async () => {
 
 .input-form-Seg i {
     position: absolute;
-    top: 17rem;
+    top: 20rem;
     left: 85rem;
     border-radius: 50%;
     background-color: black;
@@ -396,14 +395,16 @@ const inicio = async () => {
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
-
+    width: 100%;
+    height: 33rem;
+    overflow-y: auto;
 }
 
 
 .card-1 {
     display: flex;
     margin-bottom: 2rem;
- 
+
 }
 
 .first-opcion hr.active {
