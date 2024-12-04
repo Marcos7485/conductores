@@ -35,14 +35,22 @@ const formData = ref<FormData>({
 const responseMessage = ref<string | null>(null);
 const isDisabled = ref<boolean>(false);
 
+const PrimerPasoSubmit = async () => {
+    try {
+        SegundoPaso();
+    } catch (error) {
+        console.log("Error en el primer paso", error);
+    }
+}
+
 const AltaAutoSumbit = async () => {
     if (isDisabled.value) return;
     isDisabled.value = true;
-
     try {
-        const response = await axios.post('/new/cliente', formData.value);
-        responseMessage.value = response.data.message;
+        // const response = await axios.post('/new/cliente', formData.value);
+        // responseMessage.value = response.data.message;
         formDataClear();
+        TecerPaso();
     } catch (error) {
         console.error('Error enviando formulario', error);
         responseMessage.value = 'Error al guardar el cliente.';
@@ -100,29 +108,29 @@ const inicio = async () => {
 
 <template>
     <div class="page">
-        <form @submit.prevent="AltaAutoSumbit">
-            <div class="title">
-                <h3>Alta de Auto</h3>
-                <hr>
-            </div>
-            <div class="formulario">
-                <div class="form-titles">
-                    <div class="col-4 first-opcion" @click="PrimerPaso">
-                        <p>PASO 1</p>
-                        <hr :class="{ active: formularioActivo1 }">
-                    </div>
 
-                    <div class="col-4 second-opcion" @click="SegundoPaso">
-                        <p>PASO 2</p>
-                        <hr :class="{ active: formularioActivo2 }">
-                    </div>
-
-                    <div class="col-4 third-opcion">
-                        <p>FINALIZAR</p>
-                        <hr :class="{ active: formularioActivo3 }">
-                    </div>
+        <div class="title">
+            <h3>Alta de Auto</h3>
+            <hr>
+        </div>
+        <div class="formulario">
+            <div class="form-titles">
+                <div class="col-4 first-opcion" @click="PrimerPaso">
+                    <p>PASO 1</p>
+                    <hr :class="{ active: formularioActivo1 }">
                 </div>
 
+                <div class="col-4 second-opcion" @click="SegundoPaso">
+                    <p>PASO 2</p>
+                    <hr :class="{ active: formularioActivo2 }">
+                </div>
+
+                <div class="col-4 third-opcion">
+                    <p>FINALIZAR</p>
+                    <hr :class="{ active: formularioActivo3 }">
+                </div>
+            </div>
+            <form @submit.prevent="PrimerPasoSubmit">
                 <div class="card-1" v-if="formularioActivo1">
                     <div class="form-A col-6">
                         <div class="input-form">
@@ -180,6 +188,15 @@ const inicio = async () => {
                         </div>
                     </div>
                 </div>
+                <div class="opciones-buttons">
+                    <div>
+                        <div v-if="formularioActivo1">
+                            <button type="submit">SIGUIENTE</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form @submit.prevent="AltaAutoSumbit">
 
                 <div class="card-2" v-if="formularioActivo2">
                     <div class="form-SegundoPaso col-12">
@@ -196,7 +213,7 @@ const inicio = async () => {
 
                         <div class="input-form-Seg">
                             <label><b>Nombre y Apellido del Conductor</b></label>
-                            <select v-model="formData.organismo" required>
+                            <select v-model="formData.conductores" required>
                                 <option value="1">A</option>
                                 <option value="2">B</option>
                                 <option value="3">C</option>
@@ -232,33 +249,29 @@ const inicio = async () => {
                         </table>
                     </div>
                 </div>
-
-                <div class="card-3" v-if="formularioActivo3">
-                    <div class="finalizado">
-                        <div class="card">
-                            <h1>TRÁMITE FINALIZADO</h1>
-                            <p>Nuestro equipo de administradores revisará el trámite para aprobarl. <br>
-                                Le enviaremos por e-mail novedades.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="opciones-buttons">
-                <div>
-                    <div v-if="formularioActivo1">
-                        <button @click="SegundoPaso">SIGUIENTE</button>
-                    </div>
+                <div class="opciones-buttons">
                     <div v-if="formularioActivo2">
                         <button class="anterior-button" @click="PrimerPaso">ANTERIOR</button>
                         <button type="submit">FINALIZAR</button>
                     </div>
-                    <div v-if="formularioActivo3">
-                        <button @click="inicio()">VOLVER AL INICIO</button>
+                </div>
+            </form>
+
+            <div class="card-3" v-if="formularioActivo3">
+                <div class="finalizado">
+                    <div class="card">
+                        <h1>TRÁMITE FINALIZADO</h1>
+                        <p>Nuestro equipo de administradores revisará el trámite para aprobarl. <br>
+                            Le enviaremos por e-mail novedades.</p>
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="opciones-buttons">
+                <div v-if="formularioActivo3">
+                    <button @click="inicio()">VOLVER AL INICIO</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
