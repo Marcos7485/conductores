@@ -294,7 +294,7 @@ const inicio = async () => {
 
 .anterior-button {
     background-color: white;
-    border: solid 2px black;
+    border: solid .2rem black;
     color: black;
 }
 
@@ -306,8 +306,10 @@ const inicio = async () => {
 
 .opciones-buttons {
     display: flex;
-    width: 82%;
+    justify-content: flex-end;
+    width: 100%;
     justify-content: right;
+    margin-bottom: 2rem;
 }
 
 
@@ -393,14 +395,15 @@ const inicio = async () => {
 .card-2 {
     display: flex;
     flex-direction: column;
-    margin-bottom: 7rem;
+    margin-bottom: 2rem;
 
 }
 
 
 .card-1 {
     display: flex;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
+ 
 }
 
 .first-opcion hr.active {
